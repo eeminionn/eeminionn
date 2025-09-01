@@ -3,7 +3,7 @@ Building ideas where **design, robotics, and AI** converge.
 
 ---
 
-🌎 Connect with me: [LinkedIn](https://www.linkedin.com/in/tu-perfil) | [Instagram @robotica_udd](https://instagram.com/robotica_udd) | [Email](mailto:tuemail@correo.com)
+🌎 Connect with me: [LinkedIn](https://www.linkedin.com/in/emilioabarcar) | [Instagram of my robotics club @robotica_udd](https://instagram.com/robotica_udd) | [Email](e.abarcar@udd.cl)
 
 ---
 
