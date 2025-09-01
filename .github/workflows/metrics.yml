@@ -2,8 +2,11 @@ name: Metrics
 
 on:
   schedule:
-    - cron: "0 6 * * *"
+    - cron: "0 6 * * *"   # se ejecuta diario 06:00 UTC
   workflow_dispatch:
+
+permissions:
+  contents: write  # necesario para hacer commit del resultado
 
 jobs:
   build:
@@ -13,22 +16,26 @@ jobs:
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
+
+          # Perfil/base
           user: eeminionn
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: America/Santiago
 
-          # Plugins
-          plugins: languages, achievements
-          plugins_languages: yes
-          plugins_languages_sections: most-used
-          plugins_languages_details: percentage, bytes-size
-          plugins_languages_limit: 8
-          plugins_achievements: yes
-          plugins_achievements_display: compact
-          plugins_achievements_threshold: C
+          # --- Plugins correctos (prefijo plugin_) ---
+          # Lenguajes
+          plugin_languages: yes
+          plugin_languages_sections: most-used
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
 
-          # Output
+          # Logros / "trophies"
+          plugin_achievements: yes
+          plugin_achievements_display: compact
+          plugin_achievements_threshold: C
+
+          # Salida: commit automático en main
           output_action: commit
           committer_branch: main
           committer_message: "chore(metrics): update profile dashboard"
