@@ -2,11 +2,11 @@ name: Metrics
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # se ejecuta diario 06:00 UTC
+    - cron: "0 6 * * *"   # Ejecuta cada día a las 06:00 UTC
   workflow_dispatch:
 
 permissions:
-  contents: write  # necesario para hacer commit del resultado
+  contents: write  # Necesario para que el bot haga commit
 
 jobs:
   build:
@@ -17,25 +17,27 @@ jobs:
         with:
           token: ${{ secrets.METRICS_TOKEN }}
 
-          # Perfil/base
+          # Perfil/Base
           user: eeminionn
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: America/Santiago
 
-          # --- Plugins correctos (prefijo plugin_) ---
-          # Lenguajes
+          # Plugins
           plugin_languages: yes
           plugin_languages_sections: most-used
           plugin_languages_details: bytes-size, percentage
           plugin_languages_limit: 8
 
-          # Logros / "trophies"
           plugin_achievements: yes
           plugin_achievements_display: compact
           plugin_achievements_threshold: C
 
-          # Salida: commit automático en main
+          # Errores no fatales
+          plugins_errors_fatal: false
+
+          # Salida
+          filename: metrics.svg
           output_action: commit
           committer_branch: main
           committer_message: "chore(metrics): update profile dashboard"
