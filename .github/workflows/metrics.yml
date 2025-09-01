@@ -1,7 +1,7 @@
-name: Metrics (extended)
+name: Metrics (showcase, clean)
 
 on:
-  # Actualiza 4 veces al día (00:00, 06:00, 12:00, 18:00 UTC)
+  # Se actualiza 4 veces al día y en cada push a main
   schedule:
     - cron: "0 0,6,12,18 * * *"
   workflow_dispatch:
@@ -32,33 +32,35 @@ jobs:
           plugin_languages_details: bytes-size, percentage
           plugin_languages_limit: 8
 
-          # --- Logros / Achievements (ajustados para evitar error) ---
-          plugin_achievements: yes
-          plugin_achievements_display: compact
-          plugin_achievements_threshold: C
-          plugin_achievements_secrets: no   # evita leer contribuciones privadas
-
-          # --- Calendario de commits ---
+          # --- Calendario isométrico de commits ---
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
 
-          # --- Hábitos de trabajo ---
+          # --- Hábitos de trabajo (últimas 2 semanas) ---
           plugin_habits: yes
           plugin_habits_charts: yes
           plugin_habits_days: 14
           plugin_habits_facts: yes
 
-          # --- Repos destacados ---
+          # --- Repositorios destacados / fijados ---
           plugin_repositories: yes
           plugin_repositories_featured: eeminionn/eeminionn
           plugin_repositories_pinned: 3
 
-          # --- Estrellas ---
+          # --- Stargazers (charts sin worldmap) ---
           plugin_stargazers: yes
           plugin_stargazers_charts: yes
           plugin_stargazers_charts_type: classic
+          plugin_stargazers_worldmap: false
 
-          # --- Config de salida ---
+          # --- Líneas de código ---
+          plugin_lines: yes
+          plugin_lines_sections: base, repositories
+          plugin_lines_repositories_limit: 8
+          plugin_lines_history_limit: 365
+          plugin_lines_delay: 0
+
+          # --- Salida ---
           filename: metrics.svg
           output_action: commit
           committer_branch: main
