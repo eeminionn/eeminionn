@@ -4,14 +4,12 @@ on:
   # Actualiza 4 veces al día (00:00, 06:00, 12:00, 18:00 UTC)
   schedule:
     - cron: "0 0,6,12,18 * * *"
-  # Permite ejecutarlo a mano cuando quieras
   workflow_dispatch:
-  # Se vuelve a generar cada vez que hagas un commit al repo de perfil
   push:
     branches: [ main ]
 
 permissions:
-  contents: write   # necesario para hacer commit del SVG
+  contents: write
 
 jobs:
   build:
@@ -28,35 +26,34 @@ jobs:
           base: header, activity, community, repositories, metadata
           config_timezone: America/Santiago
 
-          # --- Lenguajes (panel tipo "Most used languages") ---
+          # --- Lenguajes ---
           plugin_languages: yes
           plugin_languages_sections: most-used
-          plugin_languages_limit: 8
           plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
 
-          # --- Logros / trofeos (compactos) ---
+          # --- Logros / Achievements (ajustados para evitar error) ---
           plugin_achievements: yes
           plugin_achievements_display: compact
           plugin_achievements_threshold: C
+          plugin_achievements_secrets: no   # evita leer contribuciones privadas
 
-          # --- Calendario de commits (últimos 6 meses) ---
+          # --- Calendario de commits ---
           plugin_isocalendar: yes
           plugin_isocalendar_duration: half-year
 
-          # --- Hábitos de trabajo (horarios/días) ---
+          # --- Hábitos de trabajo ---
           plugin_habits: yes
           plugin_habits_charts: yes
-          plugin_habits_days: 14        # ventana de 2 semanas
+          plugin_habits_days: 14
           plugin_habits_facts: yes
 
-          # --- Repos destacados/populares ---
+          # --- Repos destacados ---
           plugin_repositories: yes
-          plugin_repositories_featured: eeminionn/eeminionn   # puedes listar otros con coma
+          plugin_repositories_featured: eeminionn/eeminionn
           plugin_repositories_pinned: 3
-          plugin_repositories_starred: no
-          plugin_repositories_random: 0
 
-          # --- Estrellas y stargazers (evolución) ---
+          # --- Estrellas ---
           plugin_stargazers: yes
           plugin_stargazers_charts: yes
           plugin_stargazers_charts_type: classic
