@@ -76,4 +76,4 @@ My approach combines **design, engineering, and innovation**, applied to solving
 
 ---
 
-✨ *“Designing the future at the intersection of creativity, technology, and innovation.”* ✨
+✨ *“Designing the future at the intersection of creativity, technology, and innovation.”* ✨ by eeminionn
