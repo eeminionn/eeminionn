@@ -57,7 +57,7 @@ Mi enfoque combina **diseño, ingeniería e innovación**, aplicados a resolver 
 
 ## 📊 Dashboard de Métricas
 
-<img src="https://metrics.lecoq.io/eeminionn?template=classic&base=header%2Cactivity%2Ccommunity%2Crepositories%2Cmetadata&languages=1&achievements=1&config.timezone=America%2FSantiago" />
+<img src="./github-metrics.svg" alt="GitHub Metrics" />
 
 ---
 
