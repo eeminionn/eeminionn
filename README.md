@@ -55,9 +55,9 @@ My approach combines **design, engineering, and innovation**, applied to solving
 
 ---
 
-## 📊 Metrics Dashboard
+## 📊 Extended Metrics Dashboard
 
-<img src="./github-metrics.svg" alt="GitHub Metrics" />
+<img src="./metrics.svg" alt="GitHub Metrics Dashboard" />
 
 ---
 
