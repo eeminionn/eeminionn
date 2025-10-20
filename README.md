@@ -37,7 +37,7 @@ Building ideas where **design, robotics, and AI** converge.
 
 ## 🛠️ Toolbox  
 **Programming:** C/C++, Python, JavaScript, TypeScript  
-**Electronics:** Arduino, ESP32, IoT systems, custom PCB design (Eagle)  
+**Electronics:** Arduino, ESP32, IoT systems, PCB design (Eagle & KiCAD)  
 **Digital Fabrication:** Fusion 360, Blender, 3D Printing, CNC  
 **Other:** Git, MadMapper, Data Analysis (Python, ANOVA, PCA)  
 
