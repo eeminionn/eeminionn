@@ -4,17 +4,7 @@ Interaction Design student at **Universidad del Desarrollo (UDD)**, working at t
 
 I build prototypes that connect software with the physical world: embedded systems, interactive objects, STEAM learning experiences, and tools that make technology easier to explore.
 
-<p>
-  <a href="https://www.linkedin.com/in/emilioabarcar">
-    <img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-Emilio%20Abarca-0A66C2?style=flat-square&logo=linkedin&logoColor=white">
-  </a>
-  <a href="https://instagram.com/robotica_udd">
-    <img alt="Robotics Club" src="https://img.shields.io/badge/Robotics%20Club-@robotica__udd-E4405F?style=flat-square&logo=instagram&logoColor=white">
-  </a>
-  <a href="mailto:e.abarcar@udd.cl">
-    <img alt="Email" src="https://img.shields.io/badge/Email-e.abarcar%40udd.cl-333333?style=flat-square&logo=gmail&logoColor=white">
-  </a>
-</p>
+[LinkedIn](https://www.linkedin.com/in/emilioabarcar) · [Robotics Club](https://instagram.com/robotica_udd) · [Email](mailto:e.abarcar@udd.cl)
 
 ## About
 
@@ -28,10 +18,12 @@ I build prototypes that connect software with the physical world: embedded syste
 | Project | Area | Description |
 | --- | --- | --- |
 | [BattleBots 2026-1](https://github.com/eeminionn/battleBots2026-1) | Robotics education | ESP32-S3 mecanum robot kit for a UDD workshop cycle with web control, PCB support and a Boombot challenge. |
-| EIRI UDD | Robotics club | Student-driven space for robotics, IoT, applied innovation and interdisciplinary experimentation. |
-| Interactive Casino Diorama | Physical interaction | CNC, 3D printing and Arduino-based interaction for a playful installation. |
-| Line-Follower & Rescue Robots | Competitive robotics | Educational robots using C/C++, ESP32 and sensor-based control. |
-| Puente Condell Projection Mapping | Digital storytelling | Projection mapping experience on a historic urban structure. |
+| [Casino Diorama](https://github.com/eeminionn/showtimeDioramaCasino) / [concept docs](https://github.com/eeminionn/Diorama-Casino) | Physical interaction | Fabrication and interaction project combining Blender, 3D printing, CNC, Arduino and sensory feedback. |
+| [Puente Condell: Memoria Proyectada](https://github.com/eeminionn/Puente-Condell--Memoria-Proyectada) | Digital storytelling | Projection mapping proposal using animated shadows to explore urban memory under Puente Condell. |
+| [Mustakis 2025-2](https://github.com/eeminionn/mustakis2025-2) | Robotics education | Motor, PID and rotation test sketches for educational robotics workshops. |
+| [EntoScan](https://github.com/eeminionn/EntoScan) | 3D scanning | 3D digitization concept for endemic insects using photogrammetry, infrared scanning and educational visualization. |
+| [Walter DevKit IoT](https://github.com/eeminionn/walterDevKitIoT) | Wearable IoT | ESP32-S3/LTE-M/GNSS wearable safety prototype for emergency SMS and location alerts. |
+| [Othermill UDD](https://github.com/eeminionn/othermill-udd) | Digital fabrication | CNC Othermill/Bantam Tools guide for Exploratec UDD workshop use. |
 
 ## Technical Stack
 
