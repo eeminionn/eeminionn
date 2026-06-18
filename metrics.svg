@@ -177,7 +177,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                         <path fill-rule="evenodd" d="M2.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25V4.664a.25.25 0 00-.073-.177l-2.914-2.914a.25.25 0 00-.177-.073H2.75zM1 1.75C1 .784 1.784 0 2.75 0h7.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0113.25 16H2.75A1.75 1.75 0 011 14.25V1.75zm7 1.5a.75.75 0 01.75.75v1.5h1.5a.75.75 0 010 1.5h-1.5v1.5a.75.75 0 01-1.5 0V7h-1.5a.75.75 0 010-1.5h1.5V4A.75.75 0 018 3.25zm-3 8a.75.75 0 01.75-.75h4.5a.75.75 0 010 1.5h-4.5a.75.75 0 01-.75-.75z"/>
                                     </svg>
-                                    2.25m added, 2.12m removed
+                                    2.24m added, 2.11m removed
                                 </div>
                             </section>
                             <section>
@@ -235,12 +235,6 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
                                 <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
                             </svg>
-                            <span class="diff-handle">eeminionn/mallMetrics</span>
-                        </div>
-                        <div class="field">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
-                            </svg>
                             <span class="diff-handle">eeminionn/walterDevKitIoT</span>
                         </div>
                         <div class="field">
@@ -267,6 +261,12 @@
                             </svg>
                             <span class="diff-handle">eeminionn/consorcio</span>
                         </div>
+                        <div class="field">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
+                            </svg>
+                            <span class="diff-handle">eeminionn/trash</span>
+                        </div>
                     </section>
                     <section>
                         <div class="field">
@@ -290,18 +290,6 @@
                             <div class="diff-stats">
                                 <span class="added"> +5.46k</span>
                                 <span class="deleted">   -435</span>
-                            </div>
-                            <span> </span>
-                        </div>
-                        <div class="field">
-                            <div class="diff-box added"></div>
-                            <div class="diff-box added"></div>
-                            <div class="diff-box added"></div>
-                            <div class="diff-box added"></div>
-                            <div class="diff-box deleted"></div>
-                            <div class="diff-stats">
-                                <span class="added"> +4.55k</span>
-                                <span class="deleted">   -442</span>
                             </div>
                             <span> </span>
                         </div>
@@ -365,6 +353,18 @@
                             </div>
                             <span> </span>
                         </div>
+                        <div class="field">
+                            <div class="diff-box added"></div>
+                            <div class="diff-box added"></div>
+                            <div class="diff-box added"></div>
+                            <div class="diff-box added"></div>
+                            <div class="diff-box deleted"></div>
+                            <div class="diff-stats">
+                                <span class="added"> +1.45k</span>
+                                <span class="deleted">     -7</span>
+                            </div>
+                            <span> </span>
+                        </div>
                     </section>
                 </div>
             </section>
@@ -383,13 +383,13 @@
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="419.8397129735189" height="8" fill="#f1e05a"/>
-                    <rect mask="url(#languages-bar)" x="419.8397129735189" y="0" width="18.843128993870604" height="8" fill="#3572A5"/>
-                    <rect mask="url(#languages-bar)" x="438.6828419673895" y="0" width="11.659400079607888" height="8" fill="#e34c26"/>
-                    <rect mask="url(#languages-bar)" x="450.3422420469974" y="0" width="8.26027672468642" height="8" fill="#f34b7d"/>
-                    <rect mask="url(#languages-bar)" x="458.60251877168383" y="0" width="1.3042790780133349" height="8" fill="#663399"/>
-                    <rect mask="url(#languages-bar)" x="459.90679784969717" y="0" width="0.0527410816747501" height="8" fill="#89e051"/>
-                    <rect mask="url(#languages-bar)" x="459.9595389313719" y="0" width="0.040461068628091866" height="8" fill="#555555"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="418.8526538934509" height="8" fill="#f1e05a"/>
+                    <rect mask="url(#languages-bar)" x="418.8526538934509" y="0" width="18.84202121311917" height="8" fill="#3572A5"/>
+                    <rect mask="url(#languages-bar)" x="437.6946751065701" y="0" width="12.670272695471533" height="8" fill="#e34c26"/>
+                    <rect mask="url(#languages-bar)" x="450.3649478020416" y="0" width="8.240856500984309" height="8" fill="#f34b7d"/>
+                    <rect mask="url(#languages-bar)" x="458.60580430302593" y="0" width="1.3012126684596084" height="8" fill="#663399"/>
+                    <rect mask="url(#languages-bar)" x="459.9070169714855" y="0" width="0.05261708539247617" height="8" fill="#89e051"/>
+                    <rect mask="url(#languages-bar)" x="459.95963405687803" y="0" width="0.040365943121989184" height="8" fill="#555555"/>
                 </svg>
                 <div class="row fill-width">
                     <section>
@@ -402,7 +402,7 @@
                             </div>
                             <small>
                                 <div>5.33 MB</div>
-                                <div>91.27%</div>
+                                <div>91.05%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -413,8 +413,8 @@
                                 HTML
                             </div>
                             <small>
-                                <div>148 kB</div>
-                                <div>2.53%</div>
+                                <div>161 kB</div>
+                                <div>2.75%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -464,7 +464,7 @@
                             </div>
                             <small>
                                 <div>104 kB</div>
-                                <div>1.8%</div>
+                                <div>1.79%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -500,7 +500,7 @@
                                     </svg>
                                     <div class="name">
                                         <span>eeminionn/battleBots2026-1</span>
-                                        <span>created 15 days ago</span>
+                                        <span>created 16 days ago</span>
                                     </div>
                                 </div>
                                 <div class="field description">
@@ -1746,7 +1746,7 @@
             </section>
             <footer>
                 <span>These metrics include private contributions</span>
-                <span>Last updated 18 Jun 2026, 10:58:09 (timezone America/Santiago) with lowlighter/metrics@3.34.0</span>
+                <span>Last updated 18 Jun 2026, 16:20:28 (timezone America/Santiago) with lowlighter/metrics@3.34.0</span>
             </footer>
         </div>
         <div xmlns="http://www.w3.org/1999/xhtml" id="metrics-end"></div>
