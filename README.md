@@ -1,3 +1,39 @@
+<div align="center">
+
+<!-- animated contribution graph: real public GitHub data, refreshed daily by .github/workflows/update-profile-art.yml -->
+
+<h3><code>eeminionn@github ~ $ ./contributions.sh</code></h3>
+
+<img src="./contrib-heatmap.svg" width="860" alt="Emilio Abarca's GitHub contribution graph, auto-refreshed daily" />
+
+<br>
+<br>
+
+<h3><code>eeminionn@github ~ $ whoami</code></h3>
+
+<table>
+<tr>
+<td valign="top"><img src="./eeminionn-ascii.svg" width="370" alt="Emilio Abarca ASCII portrait" /></td>
+<td valign="top"><img src="./info-card.svg" width="490" alt="Emilio Abarca profile info card" /></td>
+</tr>
+</table>
+
+<br>
+<br>
+
+<h3><code>eeminionn@github ~ $ ./links.sh</code></h3>
+
+<p><b>Interaction Design student · Robotics builder · Creative technologist</b></p>
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-emilioabarca.com-0d1117?style=for-the-badge&logo=safari&logoColor=white)](https://www.emilioabarca.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-emilioabarcar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/emilioabarcar)
+[![Robotics Club](https://img.shields.io/badge/Robotics_Club-robotica__udd-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/robotica_udd)
+[![Email](https://img.shields.io/badge/Email-e.abarcar%40udd.cl-22d3ee?style=for-the-badge&logo=gmail&logoColor=black)](mailto:e.abarcar@udd.cl)
+
+<br>
+
+</div>
+
 # Emilio Abarca
 
 Interaction Design student at **Universidad del Desarrollo (UDD)**, working at the intersection of **robotics, digital fabrication, education, and AI**.
