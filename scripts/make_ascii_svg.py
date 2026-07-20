@@ -16,8 +16,8 @@ SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "source-prepped.
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE.parent / "eeminionn-ascii.svg"
 STATIC = bool(os.environ.get("STATIC"))
 
-COLS = 100
-ROWS = 53
+COLS = 74
+ROWS = 39
 CELL_W = 8
 CELL_H = 15
 RAMP = " .`:-=+*cs#%@"
