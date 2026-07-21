@@ -3,12 +3,14 @@
 
 from __future__ import annotations
 
+import base64
 import html
 import os
 import sys
+from io import BytesIO
 from pathlib import Path
 
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageFilter, ImageOps
 
 
 HERE = Path(__file__).resolve().parent
@@ -16,13 +18,11 @@ SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "source-prepped.
 OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE.parent / "eeminionn-ascii.svg"
 STATIC = bool(os.environ.get("STATIC"))
 
-COLS = 74
-ROWS = 39
+COLS = 88
+ROWS = 47
 CELL_W = 8
 CELL_H = 15
 RAMP = " .`:-=+*cs#%@"
-WHITE_FLOOR = 0.82
-GAMMA = 1.16
 
 PAD = 20
 TITLEBAR_H = 30
@@ -32,46 +32,101 @@ ART_H = ROWS * CELL_H
 CANVAS_W = ART_W + PAD * 2
 CANVAS_H = TITLEBAR_H + ART_H + STATUS_H + PAD
 
+BG_RGB = (13, 17, 23)
 BG = "#0d1117"
 BG2 = "#111722"
 FRAME = "#30363d"
 MUTED = "#7d8590"
-INK = "#c9d1d9"
+INK = "#e6edf3"
 CURSOR = "#c9d1d9"
 
 ROW_DUR = 0.11
-STAGGER = 0.11
+STAGGER = 0.09
 
 
-def sampled_rows() -> list[str]:
-    image = Image.open(SRC).convert("L")
-    image = ImageEnhance.Contrast(image).enhance(1.05)
-    image = image.resize((COLS, ROWS), Image.Resampling.LANCZOS)
-    pixels = image.load()
-    rows = []
+def darkened_portrait_data_uri(image: Image.Image) -> str:
+    underlay = image.resize((ART_W, ART_H), Image.Resampling.LANCZOS)
+    dark = Image.new("RGB", underlay.size, BG_RGB)
+    underlay = Image.blend(dark, underlay, 0.84)
+
+    buffer = BytesIO()
+    underlay.save(buffer, format="JPEG", quality=84, optimize=True)
+    payload = base64.b64encode(buffer.getvalue()).decode("ascii")
+    return f"data:image/jpeg;base64,{payload}"
+
+
+def ascii_rows(image: Image.Image) -> list[list[tuple[int, str, float]]]:
+    small = image.resize((COLS, ROWS), Image.Resampling.LANCZOS)
+    gray = ImageOps.grayscale(small)
+    gray = ImageOps.autocontrast(gray)
+    edges = gray.filter(ImageFilter.FIND_EDGES)
+    color_pixels = small.load()
+    gray_pixels = gray.load()
+    edge_pixels = edges.load()
+
+    edge_width = max(3, COLS // 12)
+    row_backgrounds = []
     for y in range(ROWS):
-        chars = []
+        left = [color_pixels[x, y] for x in range(edge_width)]
+        right = [color_pixels[COLS - 1 - x, y] for x in range(edge_width)]
+        left_rgb = tuple(sum(pixel[channel] for pixel in left) / len(left) for channel in range(3))
+        right_rgb = tuple(sum(pixel[channel] for pixel in right) / len(right) for channel in range(3))
+        row_backgrounds.append((left_rgb, right_rgb))
+
+    rows: list[list[tuple[int, str, float]]] = []
+    for y in range(ROWS):
+        row: list[tuple[int, str, float]] = []
         for x in range(COLS):
-            lum = (pixels[x, y] / 255.0) ** GAMMA
-            if lum >= WHITE_FLOOR:
-                chars.append(" ")
+            red, green, blue = color_pixels[x, y]
+            lum = gray_pixels[x, y] / 255.0
+            edge = min(1.0, edge_pixels[x, y] / 255.0 * 1.85)
+            left_bg, right_bg = row_backgrounds[y]
+            mix = x / max(1, COLS - 1)
+            background = tuple(left_bg[channel] * (1.0 - mix) + right_bg[channel] * mix for channel in range(3))
+            distance = (abs(red - background[0]) + abs(green - background[1]) + abs(blue - background[2])) / (
+                255.0 * 3.0
+            )
+            shadow = max(0.0, 0.64 - lum) * 1.55
+            subject = min(1.0, distance * 2.4)
+            signal = max(edge * 0.70, shadow * subject * 1.1)
+            if subject < 0.20:
+                signal *= 0.25
+            if x < 2 or x >= COLS - 2 or y < 2 or y >= ROWS - 2:
+                signal *= 0.20
+            if signal < 0.16:
                 continue
-            index = int((1.0 - lum) * (len(RAMP) - 1) + 0.5)
-            chars.append(RAMP[max(0, min(index, len(RAMP) - 1))])
-        rows.append("".join(chars))
+
+            ramp_index = round(min(1.0, signal * 1.25) * (len(RAMP) - 1))
+            char = RAMP[max(1, min(ramp_index, len(RAMP) - 1))]
+            opacity = min(0.42, 0.07 + signal * 0.36)
+            row.append((x, char, opacity))
+        rows.append(row)
     return rows
 
 
+def row_text(row: list[tuple[int, str, float]], y: float) -> str:
+    pieces = []
+    for x, char, opacity in row:
+        pieces.append(
+            f'<text x="{PAD + x * CELL_W}" y="{y:.1f}" fill="{INK}" '
+            f'font-size="{CELL_H * 0.86:.1f}" opacity="{opacity:.3f}">'
+            f"{html.escape(char)}</text>"
+        )
+    return "".join(pieces)
+
+
 def main() -> None:
+    image = Image.open(SRC).convert("RGB")
     art_top = TITLEBAR_H + PAD * 0.35
-    font_size = CELL_H * 0.86
+    portrait_uri = darkened_portrait_data_uri(image)
+
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{CANVAS_W}" height="{CANVAS_H}" '
         f'viewBox="0 0 {CANVAS_W} {CANVAS_H}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">',
-        '<defs>'
+        "<defs>"
         f'<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">'
         f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/>'
-        '</linearGradient></defs>',
+        "</linearGradient></defs>",
         f'<rect width="{CANVAS_W}" height="{CANVAS_H}" rx="12" fill="url(#bg)"/>',
         f'<rect x="0.5" y="0.5" width="{CANVAS_W - 1}" height="{CANVAS_H - 1}" rx="12" fill="none" stroke="{FRAME}" stroke-width="1"/>',
         f'<line x1="0" y1="{TITLEBAR_H}" x2="{CANVAS_W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>',
@@ -84,15 +139,19 @@ def main() -> None:
         "eeminionn@github: ~$ ./portrait.sh</text>"
     )
 
-    for row_index, line in enumerate(sampled_rows()):
+    parts.append(
+        f'<image x="{PAD}" y="{art_top:.1f}" width="{ART_W}" height="{ART_H}" '
+        f'href="{portrait_uri}" preserveAspectRatio="none" opacity="0.95"/>'
+    )
+    parts.append(f'<rect x="{PAD}" y="{art_top:.1f}" width="{ART_W}" height="{ART_H}" fill="{BG}" opacity="0.08"/>')
+
+    for row_index, row in enumerate(ascii_rows(image)):
+        if not row:
+            continue
         y = art_top + row_index * CELL_H + CELL_H * 0.74
         row_y = art_top + row_index * CELL_H
         delay = row_index * STAGGER
-        text = (
-            f'<text xml:space="preserve" x="{PAD}" y="{y:.1f}" fill="{INK}" '
-            f'font-size="{font_size:.1f}" textLength="{ART_W}" lengthAdjust="spacing">'
-            f"{html.escape(line)}</text>"
-        )
+        text = row_text(row, y)
         if STATIC:
             parts.append(text)
             continue
