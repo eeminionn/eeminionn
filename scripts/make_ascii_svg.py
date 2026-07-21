@@ -3,11 +3,9 @@
 
 from __future__ import annotations
 
-import base64
 import html
 import os
 import sys
-from io import BytesIO
 from pathlib import Path
 
 from PIL import Image, ImageFilter, ImageOps
@@ -32,7 +30,6 @@ ART_H = ROWS * CELL_H
 CANVAS_W = ART_W + PAD * 2
 CANVAS_H = TITLEBAR_H + ART_H + STATUS_H + PAD
 
-BG_RGB = (13, 17, 23)
 BG = "#0d1117"
 BG2 = "#111722"
 FRAME = "#30363d"
@@ -42,17 +39,6 @@ CURSOR = "#c9d1d9"
 
 ROW_DUR = 0.11
 STAGGER = 0.09
-
-
-def darkened_portrait_data_uri(image: Image.Image) -> str:
-    underlay = image.resize((ART_W, ART_H), Image.Resampling.LANCZOS)
-    dark = Image.new("RGB", underlay.size, BG_RGB)
-    underlay = Image.blend(dark, underlay, 0.84)
-
-    buffer = BytesIO()
-    underlay.save(buffer, format="JPEG", quality=84, optimize=True)
-    payload = base64.b64encode(buffer.getvalue()).decode("ascii")
-    return f"data:image/jpeg;base64,{payload}"
 
 
 def ascii_rows(image: Image.Image) -> list[list[tuple[int, str, float]]]:
@@ -98,7 +84,7 @@ def ascii_rows(image: Image.Image) -> list[list[tuple[int, str, float]]]:
 
             ramp_index = round(min(1.0, signal * 1.25) * (len(RAMP) - 1))
             char = RAMP[max(1, min(ramp_index, len(RAMP) - 1))]
-            opacity = min(0.42, 0.07 + signal * 0.36)
+            opacity = min(0.92, 0.28 + signal * 0.82)
             row.append((x, char, opacity))
         rows.append(row)
     return rows
@@ -118,7 +104,6 @@ def row_text(row: list[tuple[int, str, float]], y: float) -> str:
 def main() -> None:
     image = Image.open(SRC).convert("RGB")
     art_top = TITLEBAR_H + PAD * 0.35
-    portrait_uri = darkened_portrait_data_uri(image)
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{CANVAS_W}" height="{CANVAS_H}" '
@@ -139,11 +124,7 @@ def main() -> None:
         "eeminionn@github: ~$ ./portrait.sh</text>"
     )
 
-    parts.append(
-        f'<image x="{PAD}" y="{art_top:.1f}" width="{ART_W}" height="{ART_H}" '
-        f'href="{portrait_uri}" preserveAspectRatio="none" opacity="0.95"/>'
-    )
-    parts.append(f'<rect x="{PAD}" y="{art_top:.1f}" width="{ART_W}" height="{ART_H}" fill="{BG}" opacity="0.08"/>')
+    parts.append(f'<rect x="{PAD}" y="{art_top:.1f}" width="{ART_W}" height="{ART_H}" fill="{BG}" opacity="0.35"/>')
 
     for row_index, row in enumerate(ascii_rows(image)):
         if not row:
