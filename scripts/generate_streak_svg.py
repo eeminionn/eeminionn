@@ -22,8 +22,8 @@ GAP = 3
 RAD = 2.5
 LEFT = 34
 TOP = 24
-REVEAL = 3.6
-CYCLE = 12.0
+REVEAL = 3.0
+CYCLE = 5.2
 
 
 def sunday_index(date_text: str) -> int:
@@ -96,15 +96,15 @@ def render(username: str, data: dict[str, object]) -> str:
   .g {{ animation:pop {CYCLE}s cubic-bezier(.2,.8,.2,1) infinite both, flash {CYCLE}s ease-out infinite both; }}
   @keyframes pop {{
     0%{{opacity:.16;transform:scale(.72)}}
-    5%{{opacity:1;transform:scale(1.12)}}
-    9%,55%{{opacity:1;transform:scale(1)}}
-    62%,100%{{opacity:.16;transform:scale(.82)}}
+    8%{{opacity:1;transform:scale(1.12)}}
+    14%,34%{{opacity:1;transform:scale(1)}}
+    50%,100%{{opacity:.16;transform:scale(.82)}}
   }}
   @keyframes flash {{
     0%{{filter:brightness(.85)}}
-    5%{{filter:brightness(2.35)}}
-    12%,55%{{filter:brightness(1)}}
-    62%,100%{{filter:brightness(.85)}}
+    8%{{filter:brightness(2.35)}}
+    16%,34%{{filter:brightness(1)}}
+    50%,100%{{filter:brightness(.85)}}
   }}
   @media (prefers-reduced-motion: reduce) {{ .g {{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; }} }}
 </style>
