@@ -67,50 +67,43 @@ def chip(x: float, y: float, label: str, color: str, width: float | None = None)
     )
 
 
-def bar(x: float, y: float, label: str, value: int, color: str) -> str:
-    width = 190
-    filled = width * value / 100
+def repo_card(x: float, y: float, name: str, kind: str, detail: str, color: str) -> str:
     return (
-        f'<text x="{x}" y="{y}" fill="{MUTED}" font-size="11">{esc(label)}</text>'
-        f'<rect x="{x}" y="{y + 8}" width="{width}" height="8" rx="4" fill="{PANEL}" stroke="{FRAME}"/>'
-        f'<rect x="{x}" y="{y + 8}" width="{filled:.1f}" height="8" rx="4" fill="{color}" opacity="0.22"/>'
-        f'<rect x="{x}" y="{y + 8}" width="0" height="8" rx="4" fill="{color}">'
-        f'<animate attributeName="width" from="0" to="{filled:.1f}" dur="1.2s" begin="0.25s" fill="freeze"/>'
-        "</rect>"
+        f'<rect x="{x}" y="{y}" width="188" height="54" rx="8" fill="{PANEL}" stroke="{FRAME}"/>'
+        f'<circle cx="{x + 16}" cy="{y + 18}" r="4" fill="{color}"/>'
+        f'<text x="{x + 28}" y="{y + 22}" fill="{BRIGHT}" font-size="12.5" font-weight="700">{esc(name)}</text>'
+        f'<text x="{x + 14}" y="{y + 39}" fill="{MUTED}" font-size="10.5">{esc(kind)}</text>'
+        f'<text x="{x + 14}" y="{y + 51}" fill="{MUTED}" font-size="10">{esc(detail)}</text>'
     )
 
 
-def pipeline_widget() -> None:
-    width, height = 860, 196
-    steps = [
-        ("01", "Problem", "learning goal"),
-        ("02", "CAD", "fit + enclosure"),
-        ("03", "PCB", "power + signals"),
-        ("04", "Firmware", "control loop"),
-        ("05", "UX", "test with users"),
-        ("06", "Docs", "kit docs"),
+def repo_map_widget() -> None:
+    width, height = 860, 240
+    repos = [
+        ("BattleBots", "robot kit", "ESP32-S3, web control", BLUE),
+        ("Mustakis", "workshop code", "motors, PID, rotation tests", CYAN),
+        ("Casino Diorama", "physical interface", "CNC + Arduino feedback", GREEN),
+        ("Puente", "projection study", "shadows + urban memory", ORANGE),
+        ("EntoScan", "3D scan concept", "photogrammetry notes", PURPLE),
+        ("Walter IoT", "wearable prototype", "LTE-M, GNSS, SMS", PINK),
+        ("Othermill UDD", "fabrication guide", "CNC workshop notes", BLUE),
     ]
     parts = shell_start(width, height)
-    add_titlebar(parts, width, "eeminionn@github: ~$ ./prototype-pipeline.sh")
-    parts.append(text(28, 62, "$ build --from idea --to working-system", GREEN, 13, "700"))
-    parts.append(text(28, 84, "A practical loop for robotics kits, physical interfaces and STEAM workshops.", INK, 12))
+    add_titlebar(parts, width, "eeminionn@github: ~$ ./repo-map.sh")
+    parts.append(text(28, 62, "$ ls repos --evidence", GREEN, 13, "700"))
+    parts.append(text(28, 84, "Concrete work in this profile: code, guides, tests, fabrication notes and concept studies.", INK, 12))
 
-    start_x = 28
-    gap = 136
-    y = 110
-    for index, (number, label, detail) in enumerate(steps):
-        x = start_x + index * gap
-        color = [BLUE, CYAN, GREEN, ORANGE, PURPLE, PINK][index]
-        parts.append(f'<rect x="{x}" y="{y}" width="108" height="54" rx="8" fill="{PANEL}" stroke="{FRAME}"/>')
-        parts.append(f'<text x="{x + 12}" y="{y + 20}" fill="{color}" font-size="11" font-weight="700">{number}</text>')
-        parts.append(text(x + 12, y + 36, label, BRIGHT, 13, "700"))
-        parts.append(text(x + 12, y + 50, detail, MUTED, 10.5))
-        if index < len(steps) - 1:
-            line_x = x + 110
-            parts.append(f'<path d="M{line_x} {y + 27} H{line_x + 22}" stroke="{color}" stroke-width="2" stroke-linecap="round"/>')
+    for index, (name, kind, detail, color) in enumerate(repos):
+        row = index // 4
+        col = index % 4
+        x = 28 + col * 206
+        y = 108 + row * 68
+        parts.append(repo_card(x, y, name, kind, detail, color))
+        if index in {0, 1, 2, 4, 5}:
+            pulse_x = x + 174
             parts.append(
-                f'<circle cx="{line_x}" cy="{y + 27}" r="3" fill="{color}" filter="url(#glow)">'
-                f'<animate attributeName="cx" values="{line_x};{line_x + 22};{line_x}" dur="2.2s" begin="{index * 0.18:.2f}s" repeatCount="indefinite"/>'
+                f'<circle cx="{pulse_x}" cy="{y + 18}" r="2.6" fill="{color}" filter="url(#glow)">'
+                f'<animate attributeName="opacity" values="0.25;1;0.25" dur="1.6s" begin="{index * 0.13:.2f}s" repeatCount="indefinite"/>'
                 "</circle>"
             )
 
@@ -120,19 +113,36 @@ def pipeline_widget() -> None:
 
 def lab_console_widget() -> None:
     width, height = 420, 300
+    rows = [
+        ("now", "robot kits + workshop material"),
+        ("repo style", "code, notes, tests, guides"),
+        ("method", "depends on the project"),
+        ("bias", "make it work, then explain it"),
+    ]
+    checks = [
+        ("[x]", "firmware sketches"),
+        ("[x]", "fabrication / CNC notes"),
+        ("[x]", "student-facing docs"),
+        ("[~]", "cleaner READMEs"),
+    ]
     parts = shell_start(width, height)
-    add_titlebar(parts, width, "eeminionn@github: ~$ ./lab-status")
-    parts.append(text(22, 60, "$ scan --profile Emilio_Abarca", GREEN, 13, "700"))
-    parts.append(text(22, 86, "status", ORANGE, 12, "700"))
-    parts.append(text(92, 86, "building at the hardware/software edge", BRIGHT, 12))
-    parts.append(text(22, 110, "mode", ORANGE, 12, "700"))
-    parts.append(text(92, 110, "prototype -> test -> document", BRIGHT, 12))
-    parts.append(text(22, 134, "signal", ORANGE, 12, "700"))
-    parts.append(text(92, 134, "robotics, fabrication, interaction", BRIGHT, 12))
+    add_titlebar(parts, width, "eeminionn@github: ~$ ./bench-notes")
+    parts.append(text(22, 60, "$ cat notes/current.txt", GREEN, 13, "700"))
 
-    parts.append(bar(22, 166, "hardware + firmware integration", 88, CYAN))
-    parts.append(bar(22, 204, "workshop-ready documentation", 78, GREEN))
-    parts.append(bar(22, 242, "design-to-prototype fluency", 84, PURPLE))
+    y = 88
+    for key, value in rows:
+        parts.append(text(22, y, key, ORANGE, 12, "700"))
+        parts.append(text(106, y, value, BRIGHT, 12))
+        y += 24
+
+    parts.append(f'<line x1="22" y1="178" x2="398" y2="178" stroke="{FRAME}"/>')
+    parts.append(text(22, 205, "repo artifacts", BLUE, 12, "700"))
+    y = 229
+    for marker, value in checks:
+        color = GREEN if marker == "[x]" else CYAN
+        parts.append(text(34, y, marker, color, 11, "700"))
+        parts.append(text(72, y, value, INK, 11.5))
+        y += 20
 
     for index, color in enumerate([GREEN, CYAN, ORANGE]):
         cx = 358 + index * 16
@@ -149,17 +159,17 @@ def lab_console_widget() -> None:
 def stack_matrix_widget() -> None:
     width, height = 420, 300
     groups = [
-        ("Firmware", ["C/C++", "Arduino", "ESP32"], BLUE),
-        ("Software", ["Python", "JS", "TypeScript"], CYAN),
-        ("Electronics", ["KiCad", "Eagle", "sensors"], GREEN),
-        ("Fabrication", ["Fusion 360", "Blender", "CNC"], ORANGE),
-        ("Creative tech", ["MadMapper", "projection", "UX"], PURPLE),
-        ("AI workflow", ["docs", "analysis", "prototyping"], PINK),
+        ("Code", ["C/C++", "Python", "JS/TS"], BLUE),
+        ("Embedded", ["Arduino", "ESP32", "sensors"], CYAN),
+        ("Electronics", ["KiCad", "Eagle", "PCBs"], GREEN),
+        ("Fabrication", ["Fusion", "Blender", "CNC"], ORANGE),
+        ("Media", ["MadMapper", "projection", "UX"], PURPLE),
+        ("Docs", ["README", "guides", "analysis"], PINK),
     ]
     parts = shell_start(width, height)
-    add_titlebar(parts, width, "eeminionn@github: ~$ ./stack-matrix")
-    parts.append(text(22, 60, "$ map --toolchain", GREEN, 13, "700"))
-    parts.append(text(22, 82, "Concept -> prototype toolchain.", INK, 12))
+    add_titlebar(parts, width, "eeminionn@github: ~$ ./tools-used")
+    parts.append(text(22, 60, "$ grep -R tools ./repos", GREEN, 13, "700"))
+    parts.append(text(22, 82, "Tools I actually reach for. Not a fixed stack.", INK, 12))
 
     y = 106
     for index, (group, items, color) in enumerate(groups):
@@ -177,7 +187,7 @@ def stack_matrix_widget() -> None:
 
 
 def main() -> None:
-    pipeline_widget()
+    repo_map_widget()
     lab_console_widget()
     stack_matrix_widget()
     print("wrote build-pipeline.svg lab-console.svg stack-matrix.svg")

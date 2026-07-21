@@ -23,8 +23,8 @@
 
 <h3><code>eeminionn@github ~ $ ./links.sh</code></h3>
 
-<p><b>Interaction designer building robotics, embedded systems and learning tools.</b></p>
-<p><code>hardware</code> · <code>firmware</code> · <code>digital fabrication</code> · <code>creative technology</code> · <code>AI-assisted prototyping</code></p>
+<p><b>Interaction Design student building robotics, embedded systems and learning tools.</b></p>
+<p><code>hardware</code> · <code>firmware</code> · <code>digital fabrication</code> · <code>robotics workshops</code> · <code>project documentation</code></p>
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-emilioabarca.com-0d1117?style=for-the-badge&logo=safari&logoColor=white)](https://www.emilioabarca.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-emilioabarcar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/emilioabarcar)
@@ -34,17 +34,17 @@
 <br>
 <br>
 
-<h3><code>eeminionn@github ~ $ ./systems.sh</code></h3>
+<h3><code>eeminionn@github ~ $ ./evidence.sh</code></h3>
 
-<img src="./build-pipeline.svg" width="860" alt="Prototype pipeline: problem, CAD, PCB, firmware, UX and documentation" />
+<img src="./build-pipeline.svg" width="860" alt="Repository evidence map: robotics, fabrication, projection, IoT and workshop projects" />
 
 <br>
 <br>
 
 <table>
 <tr>
-<td valign="top"><img src="./lab-console.svg" width="420" alt="Lab status console for Emilio Abarca" /></td>
-<td valign="top"><img src="./stack-matrix.svg" width="420" alt="Toolchain matrix for firmware, software, electronics, fabrication and AI workflow" /></td>
+<td valign="top"><img src="./lab-console.svg" width="420" alt="Bench notes: current focus and repo artifacts" /></td>
+<td valign="top"><img src="./stack-matrix.svg" width="420" alt="Tools used across Emilio Abarca's repositories" /></td>
 </tr>
 </table>
 
@@ -54,18 +54,11 @@
 
 # Emilio Abarca
 
-Interaction Design student at **Universidad del Desarrollo (UDD)** working across **robotics, embedded systems, digital fabrication, education and AI-assisted prototyping**.
+Interaction Design student at **Universidad del Desarrollo (UDD)** working with **robotics, embedded systems, digital fabrication and physical interaction**.
 
-I care about projects that survive contact with reality: motors that actually move, interfaces people can understand, workshop material that another person can repeat, and documentation that makes the system easier to improve.
+This profile is a working archive, not a polished product catalog. Some repos are workshop material, some are prototype notes, some are fabrication guides, and some are concept studies. The common thread is simple: I like building things that cross between software and the physical world.
 
-## Positioning
-
-I design and build learning-centered technical systems. That means I move between the product questions and the engineering questions:
-
-- What should the user understand after using this?
-- What physical behavior does the prototype need to prove?
-- What hardware, firmware and fabrication choices make it reliable enough to teach with?
-- What needs to be documented so the next person can build on it?
+I do not follow one fixed methodology. The way of working changes with the project: sometimes it starts in CAD, sometimes with an ESP32 sketch, sometimes with a class brief, sometimes with a messy test file that later becomes documentation.
 
 ## Leadership and Teaching
 
@@ -73,54 +66,50 @@ I design and build learning-centered technical systems. That means I move betwee
 - Mentor at **Fundacion Mustakis**, bringing robotics and STEAM experiences to new generations.
 - Active in the UDD robotics community through workshop design, technical documentation and student-facing prototypes.
 
-## Build Tracks
+## What You Can Actually Find Here
 
-| Track | What I build | Evidence |
+| Area | What is in the repos | Evidence |
 | --- | --- | --- |
-| Robotics education | ESP32-based robot kits, workshop exercises, control tests and competition formats. | [BattleBots 2026-1](https://github.com/eeminionn/battleBots2026-1), [Mustakis 2025-2](https://github.com/eeminionn/mustakis2025-2) |
-| Physical interaction | Objects that connect sensing, fabrication, storytelling and feedback. | [Casino Diorama](https://github.com/eeminionn/showtimeDioramaCasino), [Diorama concept docs](https://github.com/eeminionn/Diorama-Casino) |
-| Digital fabrication | CNC, 3D printing and fabrication workflows that become usable workshop references. | [Othermill UDD](https://github.com/eeminionn/othermill-udd) |
-| Creative technology | Projection mapping, spatial narratives and interactive learning experiences. | [Puente Condell](https://github.com/eeminionn/Puente-Condell--Memoria-Proyectada) |
-| IoT and sensing | Wearable and connected prototypes with location, emergency and sensor logic. | [Walter DevKit IoT](https://github.com/eeminionn/walterDevKitIoT) |
+| Robotics education | Robot kits, workshop sketches, motor tests, PID/rotation experiments and control ideas. | [BattleBots 2026-1](https://github.com/eeminionn/battleBots2026-1), [Mustakis 2025-2](https://github.com/eeminionn/mustakis2025-2) |
+| Physical interaction | Diorama work, Arduino feedback, fabrication process and interaction experiments. | [Casino Diorama](https://github.com/eeminionn/showtimeDioramaCasino), [Diorama concept docs](https://github.com/eeminionn/Diorama-Casino) |
+| Digital fabrication | CNC notes and workshop-facing fabrication references. | [Othermill UDD](https://github.com/eeminionn/othermill-udd) |
+| Projection and media | Projection mapping proposals, animated shadow systems and spatial storytelling. | [Puente Condell](https://github.com/eeminionn/Puente-Condell--Memoria-Proyectada) |
+| IoT and sensing | Wearable safety concepts with location, messaging and connectivity logic. | [Walter DevKit IoT](https://github.com/eeminionn/walterDevKitIoT) |
 
-## Selected Systems
+## Repository Notes
 
-| Project | Area | Why it matters |
-| --- | --- | --- |
-| [BattleBots 2026-1](https://github.com/eeminionn/battleBots2026-1) | Robotics education | ESP32-S3 mecanum robot kit for a UDD workshop cycle, with web control, PCB support and a competition challenge. |
-| [Casino Diorama](https://github.com/eeminionn/showtimeDioramaCasino) | Physical interaction | Fabrication and interaction project combining Blender, 3D printing, CNC, Arduino and sensory feedback. |
-| [Puente Condell: Memoria Proyectada](https://github.com/eeminionn/Puente-Condell--Memoria-Proyectada) | Digital storytelling | Projection mapping proposal using animated shadows to explore urban memory under Puente Condell. |
-| [Mustakis 2025-2](https://github.com/eeminionn/mustakis2025-2) | Robotics education | Motor, PID and rotation test sketches for educational robotics workshops. |
-| [EntoScan](https://github.com/eeminionn/EntoScan) | 3D scanning | 3D digitization concept for endemic insects using photogrammetry, infrared scanning and educational visualization. |
-| [Walter DevKit IoT](https://github.com/eeminionn/walterDevKitIoT) | Wearable IoT | ESP32-S3/LTE-M/GNSS wearable safety prototype for emergency SMS and location alerts. |
+| Repo | Look for |
+| --- | --- |
+| [BattleBots 2026-1](https://github.com/eeminionn/battleBots2026-1) | ESP32-S3 robot kit work, mecanum movement, web control, PCB support and workshop structure. |
+| [Mustakis 2025-2](https://github.com/eeminionn/mustakis2025-2) | Small robotics tests: motors, PID and rotation sketches for teaching contexts. |
+| [Casino Diorama](https://github.com/eeminionn/showtimeDioramaCasino) | A physical build mixing Blender, 3D printing, CNC, Arduino and sensory feedback. |
+| [Othermill UDD](https://github.com/eeminionn/othermill-udd) | A practical CNC/Othermill guide for workshop use. |
+| [Puente Condell](https://github.com/eeminionn/Puente-Condell--Memoria-Proyectada) | Projection mapping and animated shadow documentation for an urban memory concept. |
+| [EntoScan](https://github.com/eeminionn/EntoScan) | 3D scanning and educational visualization concept for endemic insects. |
+| [Walter DevKit IoT](https://github.com/eeminionn/walterDevKitIoT) | Wearable IoT safety prototype using ESP32-S3, LTE-M/GNSS and emergency SMS logic. |
 
 ## Toolchain
 
-| Domain | Tools and technologies |
+Tools change by project, but these show up often in my work:
+
+| Domain | Tools |
 | --- | --- |
-| Firmware | C/C++, Arduino, ESP32, sensors, motors, servos, control loops |
-| Software | Python, JavaScript, TypeScript, web interfaces, automation scripts |
-| Electronics | PCB design, Eagle, KiCad, prototyping, debugging |
+| Code | C/C++, Python, JavaScript, TypeScript |
+| Embedded | Arduino, ESP32, sensors, motors, servos |
+| Electronics | KiCad, Eagle, PCB notes, prototyping and debugging |
 | Fabrication | Fusion 360, Blender, 3D printing, CNC machining |
-| Creative tech | MadMapper, projection mapping, physical interfaces |
-| Analysis | Python, ANOVA, PCA, exploratory analysis, AI-assisted documentation |
+| Media / interaction | MadMapper, projection mapping, physical interfaces |
+| Documentation | READMEs, workshop guides, test notes, AI-assisted cleanup |
 
-## Operating Principles
+## Current Focus, Without The Smoke
 
-- Prototype against real constraints: power, motors, materials, assembly, timing and users.
-- Make systems observable: logs, tests, diagrams and small experiments beat vague confidence.
-- Document the path, not only the final artifact, so projects can become workshops.
-- Treat design as a technical tool: clarity, affordances and feedback are part of the system.
-- Use AI to accelerate exploration and documentation, then validate with hardware and people.
-
-## Current Focus
-
-- Designing robotics workshops with clear hardware, firmware and learning outcomes.
-- Building educational kits that help students understand electronics through competition and experimentation.
-- Improving the bridge between visual design, physical prototyping and maintainable code.
+- Cleaning up robotics workshop repos so they are easier to reuse.
+- Making ESP32/web-control projects easier to understand from the README alone.
+- Keeping fabrication notes close to the code whenever a project uses CNC, 3D printing or electronics.
+- Using AI mostly as a writing, organization and exploration tool, not as a replacement for testing hardware.
 
 ## Contact
 
 [LinkedIn](https://www.linkedin.com/in/emilioabarcar) · [Portfolio](https://www.emilioabarca.com) · [Robotics Club](https://instagram.com/robotica_udd) · [Email](mailto:e.abarcar@udd.cl)
 
-> Build the thing, test the thing, explain the thing.
+> Less pitch deck. More files that explain what happened.
