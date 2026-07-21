@@ -23,7 +23,7 @@ RAD = 2.5
 LEFT = 34
 TOP = 24
 REVEAL = 3.6
-DUR = 0.55
+CYCLE = 12.0
 
 
 def sunday_index(date_text: str) -> int:
@@ -92,11 +92,21 @@ def render(username: str, data: dict[str, object]) -> str:
 <style>
   text.lbl {{ fill:{GRAY}; font-size:13px; font-weight:600; }}
   text.total {{ fill:{TEXT}; font-size:15px; font-weight:700; }}
-  .c {{ transform-box:fill-box; transform-origin:center; opacity:1; animation:pop {DUR}s ease-out both; }}
-  .g {{ animation:pop {DUR}s ease-out both, flash {DUR + 0.15}s ease-out both; }}
-  @keyframes pop {{ 0%{{opacity:0;transform:scale(.2)}} 60%{{opacity:1;transform:scale(1.1)}} 100%{{opacity:1;transform:scale(1)}} }}
-  @keyframes flash {{ 0%{{filter:brightness(2.4)}} 45%{{filter:brightness(2.4)}} 100%{{filter:brightness(1)}} }}
-  @media (prefers-reduced-motion: reduce) {{ .c {{ opacity:1 !important; animation:none !important; }} }}
+  .c {{ transform-box:fill-box; transform-origin:center; opacity:1; }}
+  .g {{ animation:pop {CYCLE}s cubic-bezier(.2,.8,.2,1) infinite both, flash {CYCLE}s ease-out infinite both; }}
+  @keyframes pop {{
+    0%{{opacity:.16;transform:scale(.72)}}
+    5%{{opacity:1;transform:scale(1.12)}}
+    9%,55%{{opacity:1;transform:scale(1)}}
+    62%,100%{{opacity:.16;transform:scale(.82)}}
+  }}
+  @keyframes flash {{
+    0%{{filter:brightness(.85)}}
+    5%{{filter:brightness(2.35)}}
+    12%,55%{{filter:brightness(1)}}
+    62%,100%{{filter:brightness(.85)}}
+  }}
+  @media (prefers-reduced-motion: reduce) {{ .g {{ opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; }} }}
 </style>
 <rect width="{width}" height="{height}" fill="none"/>
 {''.join(labels)}

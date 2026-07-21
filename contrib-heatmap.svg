@@ -2,11 +2,21 @@
 <style>
   text.lbl { fill:#7d8590; font-size:13px; font-weight:600; }
   text.total { fill:#e6edf3; font-size:15px; font-weight:700; }
-  .c { transform-box:fill-box; transform-origin:center; opacity:1; animation:pop 0.55s ease-out both; }
-  .g { animation:pop 0.55s ease-out both, flash 0.7000000000000001s ease-out both; }
-  @keyframes pop { 0%{opacity:0;transform:scale(.2)} 60%{opacity:1;transform:scale(1.1)} 100%{opacity:1;transform:scale(1)} }
-  @keyframes flash { 0%{filter:brightness(2.4)} 45%{filter:brightness(2.4)} 100%{filter:brightness(1)} }
-  @media (prefers-reduced-motion: reduce) { .c { opacity:1 !important; animation:none !important; } }
+  .c { transform-box:fill-box; transform-origin:center; opacity:1; }
+  .g { animation:pop 12.0s cubic-bezier(.2,.8,.2,1) infinite both, flash 12.0s ease-out infinite both; }
+  @keyframes pop {
+    0%{opacity:.16;transform:scale(.72)}
+    5%{opacity:1;transform:scale(1.12)}
+    9%,55%{opacity:1;transform:scale(1)}
+    62%,100%{opacity:.16;transform:scale(.82)}
+  }
+  @keyframes flash {
+    0%{filter:brightness(.85)}
+    5%{filter:brightness(2.35)}
+    12%,55%{filter:brightness(1)}
+    62%,100%{filter:brightness(.85)}
+  }
+  @media (prefers-reduced-motion: reduce) { .g { opacity:1 !important; transform:none !important; filter:none !important; animation:none !important; } }
 </style>
 <rect width="888" height="158" fill="none"/>
 <text class="lbl" x="34" y="16">Jul</text><text class="lbl" x="66" y="16">Aug</text><text class="lbl" x="146" y="16">Sep</text><text class="lbl" x="210" y="16">Oct</text><text class="lbl" x="274" y="16">Nov</text><text class="lbl" x="354" y="16">Dec</text><text class="lbl" x="418" y="16">Jan</text><text class="lbl" x="482" y="16">Feb</text><text class="lbl" x="546" y="16">Mar</text><text class="lbl" x="626" y="16">Apr</text><text class="lbl" x="690" y="16">May</text><text class="lbl" x="770" y="16">Jun</text><text class="lbl" x="834" y="16">Jul</text><text class="lbl" x="2" y="51">Mon</text><text class="lbl" x="2" y="83">Wed</text><text class="lbl" x="2" y="115">Fri</text>
