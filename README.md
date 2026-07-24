@@ -52,6 +52,7 @@ These repositories contain firmware, workshop material, fabrication logs, tests 
 
 | Repository | What is inside |
 | --- | --- |
+| [Tomatin Code Lab](https://github.com/eeminionn/tomatin-code-lab) · [Live](https://eeminionn.github.io/tomatin-code-lab/) | Installable programming lab with 20 university-level missions, an isolated JavaScript runner, local progress and Chilean references. |
 | [MallMetrics](https://github.com/eeminionn/mallMetrics) | Django and Chart.js tooling for pedestrian-flow studies, CSV reports and heatmaps. |
 | [Coca-Cola Stock Monitor](https://github.com/eeminionn/coca-cola-stock-monitor) | Scheduled Python monitor with catalog comparison and GitHub Actions alerts. |
 | [EntoScan](https://github.com/eeminionn/EntoScan) | 3D scanning, photogrammetry and an educational AR concept for endemic insects. |
