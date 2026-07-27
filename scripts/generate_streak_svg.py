@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
-"""Generate animated GitHub contribution heatmap artwork for profile READMEs."""
+"""Generate a reference-style animated GitHub contribution heatmap SVG."""
 
 from __future__ import annotations
 
 import datetime as dt
 import json
-import math
 import sys
 from pathlib import Path
-
-from PIL import Image, ImageDraw, ImageFont
 
 
 HERE = Path(__file__).resolve().parent
 DATA_PATH = HERE.parent / "data" / "contributions.json"
 
 COLORS = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"]
-BACKGROUND = "#0d1117"
 GRAY = "#7d8590"
 TEXT = "#e6edf3"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -28,7 +24,6 @@ LEFT = 34
 TOP = 24
 REVEAL = 3.0
 CYCLE = 5.2
-GIF_FPS = 10
 
 
 def sunday_index(date_text: str) -> int:
@@ -47,8 +42,8 @@ def normalized_days(days: list[dict[str, int | str]]) -> list[dict[str, int | st
     return padded
 
 
-def month_positions(days: list[dict[str, int | str] | None]) -> list[tuple[str, int]]:
-    positions = []
+def month_labels(days: list[dict[str, int | str] | None]) -> list[str]:
+    labels = []
     last_month = None
     for week in range(len(days) // 7):
         first_day = next((day for day in days[week * 7 : week * 7 + 7] if day), None)
@@ -58,128 +53,8 @@ def month_positions(days: list[dict[str, int | str] | None]) -> list[tuple[str, 
         if date.month != last_month:
             last_month = date.month
             x = LEFT + week * (CELL + GAP)
-            positions.append((MONTHS[date.month - 1], x))
-    return positions
-
-
-def month_labels(days: list[dict[str, int | str] | None]) -> list[str]:
-    return [
-        f'<text class="lbl" x="{x}" y="{TOP - 8}">{label}</text>'
-        for label, x in month_positions(days)
-    ]
-
-
-def load_font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    names = (
-        ["DejaVuSans-Bold.ttf", "Arial Bold.ttf"]
-        if bold
-        else ["DejaVuSans.ttf", "Arial.ttf"]
-    )
-    roots = [
-        Path("/usr/share/fonts/truetype/dejavu"),
-        Path("/System/Library/Fonts/Supplemental"),
-        Path("/Library/Fonts"),
-    ]
-    for root in roots:
-        for name in names:
-            candidate = root / name
-            if candidate.exists():
-                return ImageFont.truetype(candidate, size)
-    return ImageFont.load_default()
-
-
-def mix_color(first: str, second: str, amount: float) -> tuple[int, int, int]:
-    amount = max(0.0, min(amount, 1.0))
-    first_rgb = tuple(int(first[index : index + 2], 16) for index in (1, 3, 5))
-    second_rgb = tuple(int(second[index : index + 2], 16) for index in (1, 3, 5))
-    return tuple(
-        round(start + (end - start) * amount)
-        for start, end in zip(first_rgb, second_rgb)
-    )
-
-
-def render_gif(data: dict[str, object], output: Path) -> None:
-    days = normalized_days(data["days"])  # type: ignore[index]
-    weeks = len(days) // 7
-    width = LEFT + weeks * (CELL + GAP) + 6
-    height = TOP + 7 * (CELL + GAP) + 22
-    max_order = max(1.0, (weeks - 1) + 6 * 0.55)
-    label_font = load_font(11)
-    total_font = load_font(13, bold=True)
-    total = int(data.get("total_contributions", 0))
-    frames = []
-
-    for frame_index in range(round(CYCLE * GIF_FPS)):
-        elapsed = frame_index / GIF_FPS
-        image = Image.new("RGB", (width, height), BACKGROUND)
-        draw = ImageDraw.Draw(image)
-
-        for label, x in month_positions(days):
-            draw.text((x, 1), label, fill=GRAY, font=label_font)
-        for name, row in [("Mon", 1), ("Wed", 3), ("Fri", 5)]:
-            draw.text(
-                (2, TOP + row * (CELL + GAP)),
-                name,
-                fill=GRAY,
-                font=label_font,
-            )
-
-        wave_position = min(elapsed / REVEAL, 1.0) * max_order
-        end_fade = max(0.0, min((elapsed - REVEAL) / 1.1, 1.0))
-
-        for index, day in enumerate(days):
-            if day is None:
-                continue
-            week = index // 7
-            row = index % 7
-            x = LEFT + week * (CELL + GAP)
-            y = TOP + row * (CELL + GAP)
-            level = max(0, min(int(day.get("level", 0)), 4))
-
-            if level == 0:
-                color = COLORS[0]
-                scale = 1.0
-            else:
-                order = week + row * 0.55
-                distance = abs(order - wave_position)
-                glow = max(0.0, 1.0 - distance / 1.8)
-                settled = 0.72 if order <= wave_position else 0.24
-                intensity = settled + (0.24 - settled) * end_fade
-                intensity = max(intensity, 0.28 + glow * 0.72)
-                color = mix_color(BACKGROUND, COLORS[level], intensity)
-                color = mix_color(
-                    f"#{color[0]:02x}{color[1]:02x}{color[2]:02x}",
-                    "#ffffff",
-                    glow * 0.34,
-                )
-                scale = 1.0 + math.sin(glow * math.pi / 2) * 0.14
-
-            size = CELL * scale
-            offset = (size - CELL) / 2
-            draw.rounded_rectangle(
-                (x - offset, y - offset, x + CELL + offset, y + CELL + offset),
-                radius=RAD,
-                fill=color,
-            )
-
-        draw.text(
-            (LEFT, height - 19),
-            f"{total:,} contributions in the last year",
-            fill=TEXT,
-            font=total_font,
-        )
-        frames.append(image)
-
-    frame_duration = round(1000 / GIF_FPS)
-    frames[0].save(
-        output,
-        save_all=True,
-        append_images=frames[1:],
-        duration=frame_duration,
-        loop=0,
-        optimize=True,
-        disposal=2,
-    )
+            labels.append(f'<text class="lbl" x="{x}" y="{TOP - 8}">{MONTHS[date.month - 1]}</text>')
+    return labels
 
 
 def render(username: str, data: dict[str, object]) -> str:
@@ -244,17 +119,10 @@ def render(username: str, data: dict[str, object]) -> str:
 def main() -> None:
     username = sys.argv[1] if len(sys.argv) > 1 else "eeminionn"
     output = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE.parent / "contrib-heatmap.svg"
-    gif_output = (
-        Path(sys.argv[3])
-        if len(sys.argv) > 3
-        else output.with_suffix(".gif")
-    )
     data = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     svg = render(username, data)
     output.write_text(svg, encoding="utf-8")
     print(f"wrote {output}: {len(svg)} bytes")
-    render_gif(data, gif_output)
-    print(f"wrote {gif_output}: {gif_output.stat().st_size} bytes")
 
 
 if __name__ == "__main__":
