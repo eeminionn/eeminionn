@@ -1,55 +1,20 @@
 {
   "username": "eeminionn",
-  "generated_at": "2026-09-05T10:34:33Z",
+  "generated_at": "2026-09-06T10:55:30Z",
   "range": {
-    "start": "2025-08-31",
-    "end": "2026-09-05"
+    "start": "2025-09-07",
+    "end": "2026-09-06"
   },
-  "total_contributions": 627,
-  "active_days": 78,
-  "current_streak": 43,
-  "longest_streak": 43,
+  "total_contributions": 612,
+  "active_days": 77,
+  "current_streak": 44,
+  "longest_streak": 44,
   "best_day": {
     "date": "2026-07-24",
     "count": 107,
     "level": 4
   },
   "days": [
-    {
-      "date": "2025-08-31",
-      "count": 15,
-      "level": 2
-    },
-    {
-      "date": "2025-09-01",
-      "count": 1,
-      "level": 1
-    },
-    {
-      "date": "2025-09-02",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-09-03",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-09-04",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-09-05",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-09-06",
-      "count": 0,
-      "level": 0
-    },
     {
       "date": "2025-09-07",
       "count": 0,
@@ -1867,6 +1832,11 @@
     },
     {
       "date": "2026-09-05",
+      "count": 1,
+      "level": 1
+    },
+    {
+      "date": "2026-09-06",
       "count": 0,
       "level": 0
     }
